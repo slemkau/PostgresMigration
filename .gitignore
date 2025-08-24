@@ -1,0 +1,17 @@
+# Rider & JetBrains
+.idea/
+*.sln.iml
+
+# Build output
+bin/
+obj/
+*.user
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# SQL temp or editor backups
+*.sql~  
+*.bak  

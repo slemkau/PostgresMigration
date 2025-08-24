@@ -1,0 +1,12 @@
+# Normalize line endings
+* text=auto
+
+# SQL files: treat as UTF-8 text
+*.sql text eol=lf
+
+# C# files
+*.cs text eol=crlf
+
+# Prevent merge conflicts in Rider project files
+*.sln merge=union
+*.csproj merge=union
