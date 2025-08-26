@@ -2,7 +2,8 @@
   "name": "PostgreSQL Dev",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "postgres",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces/PostgresMigration",
+  "forwardPorts": [5432],
   "extensions": [
     "ms-azuretools.vscode-docker",
     "mtxr.sqltools"
