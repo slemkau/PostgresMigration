@@ -1,0 +1,10 @@
+{
+  "name": "PostgreSQL Dev",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "postgres",
+  "workspaceFolder": "/workspace",
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "mtxr.sqltools"
+  ]
+}

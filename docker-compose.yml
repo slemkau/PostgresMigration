@@ -1,0 +1,5 @@
+﻿services:
+  postgres:
+    image: slemkau/insights-db:v1
+    ports:
+      - "5432:5432"

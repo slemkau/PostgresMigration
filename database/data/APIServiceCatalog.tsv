@@ -1,0 +1,7 @@
+1	Account API	Account data contains Insured First&Last Name and contacts from the submission.	Insured Data	2018-02-06 10:39:00	2018-02-06 10:39:00
+2	Submission API	Party and Submission data contains Party data, policy status and other indicators such as NON-Renew and Renewal Shell.	Policy Identifiers	2018-02-06 10:39:00	2018-02-06 10:39:00
+3	Policy API	Policy Rate, Quote, Bind and Issue services.	Underwriting	2018-02-06 10:39:00	2018-02-06 10:39:00
+4	Billing API	Billing Account, Receivables and Unidentified cash.	Financials	2018-02-06 10:39:00	2018-02-06 10:39:00
+5	Claims API	Submit Claims, Claims Status, FNOL and other Claims data APIs.	Financials	2018-02-06 10:39:00	2018-02-06 10:39:00
+6	Document API	COI, Policy, Endorsement, Cancel documment APIs.	Documents	2018-02-06 10:39:00	2018-02-06 10:39:00
+7	Enterprise API	Address Validation, OFAC, Log & Notify, SendGrid and others.	Enterprise Services	2018-02-06 10:39:00	2018-02-06 10:39:00
