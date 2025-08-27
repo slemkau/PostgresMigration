@@ -1,4 +1,7 @@
-﻿\i '/sql/user.sql'
+CREATE DATABASE insights;
+\connect insights
+
+\i '/sql/user.sql'
 \i '/sql/tables.sql'
 \i '/sql/sequences_nocreate.sql'
 \i '/sql/views.sql'
