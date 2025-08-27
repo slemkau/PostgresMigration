@@ -3,6 +3,7 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "postgres",
   "workspaceFolder": "/workspaces/PostgresMigration",
+  "postCreateCommand": "apt update && apt install git -y",
   "forwardPorts": [5432],
   "extensions": [
     "ms-azuretools.vscode-docker",
