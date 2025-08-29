@@ -13,6 +13,9 @@
       - ./database/master.sql:/docker-entrypoint-initdb.d/master.sql
       - ./database:/sql
       - ./database/data:/data
+    command: >
+      postgres
+      -c listen_addresses='*'
 
 volumes:
   pgdata:
