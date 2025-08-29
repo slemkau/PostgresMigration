@@ -1,4 +1,3 @@
-CREATE DATABASE insights;
 \connect insights
 
 \i '/sql/user.sql'
