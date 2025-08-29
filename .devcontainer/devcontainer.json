@@ -1,9 +1,13 @@
 {
   "name": "PostgreSQL Dev",
-  "dockerComposeFile": "../docker-compose.yml",
-  "service": "postgres",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/docker-compose:2": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
   "workspaceFolder": "/workspaces/PostgresMigration",
-  "postCreateCommand": "apt update && apt install git -y",
+  "postCreateCommand": "docker compose up -d",
   "forwardPorts": [5432],
   "extensions": [
     "ms-azuretools.vscode-docker",
