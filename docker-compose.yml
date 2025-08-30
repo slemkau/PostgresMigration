@@ -13,10 +13,11 @@
       - ./database/master.sql:/docker-entrypoint-initdb.d/master.sql
       - ./database:/sql
       - ./database/data:/data
+      - ./database/pg_hba.conf:/etc/postgresql/pg_hba.conf
     command: >
       postgres
       -c listen_addresses='*'
-      -c log_statement=all
+      -c hba_file=/etc/postgresql/pg_hba.conf
 
 volumes:
   pgdata:
