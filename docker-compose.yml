@@ -16,6 +16,7 @@
     command: >
       postgres
       -c listen_addresses='*'
+      -c log_statement=all
 
 volumes:
   pgdata:
