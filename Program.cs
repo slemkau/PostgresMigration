@@ -161,7 +161,7 @@ namespace Migration
         {
             var comparer = new Migration(
                 "Server=.;Database=Insights;Trusted_Connection=True;trustServerCertificate=true;",
-                "Host=localhost;Port=5433;Database=insights;Username=slemkau;Password=slemkau"
+                "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=slemkau"
             );
 
             await comparer.CompareTablesAsync();

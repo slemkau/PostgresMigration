@@ -1,8 +1,16 @@
 {
   "name": "PostgreSQL Dev",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
   "service": "postgres",
   "workspaceFolder": "/workspaces/PostgresMigration",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/PostgresMigration,type=bind,consistency=cached",
   "postCreateCommand": "apt update && apt install -y git postgresql-client",
-  "forwardPorts": [5432]
+  "forwardPorts": [5432],
+  "mounts": [
+    "source=${localWorkspaceFolder}/database,target=/workspaces/PostgresMigration/database,type=bind"
+  ],
+  "features": {},
+  "remoteUser": "root"
 }
