@@ -3,6 +3,6 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "postgres",
   "workspaceFolder": "/workspaces/PostgresMigration",
-  "postCreateCommand": "apt update && apt install git -y",
+  "postCreateCommand": "apt update && apt install -y git postgresql-client",
   "forwardPorts": [5432]
 }
