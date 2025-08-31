@@ -4,7 +4,7 @@ DO $$
         IF NOT EXISTS (
             SELECT FROM pg_roles WHERE rolname = 'slemkau'
         ) THEN
-            CREATE ROLE slemkau LOGIN PASSWORD 'slemkau';
+            CREATE ROLE slemkau LOGIN PASSWORD 'Uakmels!1!2';
         END IF;
     END $$;
 
