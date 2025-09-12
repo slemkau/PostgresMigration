@@ -452,3 +452,53 @@ $$;
 
 alter procedure public.upd_attachment_log(uuid, varchar, bytea) owner to postgres;
 
+create function public.query_select_audit_logs(p_status character varying DEFAULT NULL::character varying, p_from_date timestamp without time zone DEFAULT NULL::timestamp without time zone, p_to_date timestamp without time zone DEFAULT NULL::timestamp without time zone, p_subject character varying DEFAULT NULL::character varying, p_id character varying DEFAULT NULL::character varying, p_total_rows integer DEFAULT 1000)
+    returns TABLE(row_number integer, audit_key integer, log_timestamp timestamp without time zone, id character varying, id_type character varying, ds_id character varying, ds_id_type character varying, status character varying, subject character varying, source_system character varying, destination character varying, batch_id character varying, audit_message character varying)
+    language plpgsql
+as
+$$
+
+begin
+    return query
+        with audit_logs as (
+            select
+                        row_number() over (order by a.audit_key desc)::int as row_number,
+                        a.audit_key,
+                        a.timestamp as log_timestamp,
+                        a.id,
+                        a.id_type,
+                        a.ds_id,
+                        a.ds_id_type,
+                        a.status,
+                        a.subject,
+                        a.source_system,
+                        a.destination,
+                        a.batch_id,
+                        a.audit_message
+            from audit_request a
+            where (a.timestamp > p_from_date or p_from_date is null)
+              and (a.timestamp < p_to_date or p_to_date is null)
+              and (p_status is null or a.status ilike p_status)
+              and (p_subject is null or a.subject ilike p_subject)
+              and (p_id is null or a.id ilike p_id)
+        )
+        select aus.row_number,
+               aus.audit_key,
+               aus.log_timestamp,
+               aus.id,
+               aus.id_type,
+               aus.ds_id,
+               aus.ds_id_type,
+               aus.status,
+               aus.subject,
+               aus.source_system,
+               aus.destination,
+               aus.batch_id,
+               aus.audit_message
+        from audit_logs aus
+        where aus.row_number <= p_total_rows;
+end;
+$$;
+
+alter function public.query_select_audit_logs(varchar, timestamp, timestamp, varchar, varchar, integer) owner to postgres;
+

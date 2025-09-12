@@ -100,3 +100,10 @@ alter sequence public.sendgrid_event_details_event_detail_key_seq owned by publi
 
 grant select, usage on sequence public.sendgrid_event_details_event_detail_key_seq to slemkau;
 
+create sequence public.audit_request_audit_key_seq
+    as integer;
+
+alter sequence public.audit_request_audit_key_seq owner to postgres;
+
+alter sequence public.audit_request_audit_key_seq owned by public.audit_request.audit_key;
+

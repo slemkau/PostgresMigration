@@ -1,13 +1,15 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Data.SqlClient;
 using Dapper;
 using Npgsql;
 
 namespace Migration
 {
-    public class Migration(string sqlServerConn, string pgConn)
+    public class Migration(string sqlServerConn, string sqlServerConnCmn, string pgConn)
     {
         private readonly string _sqlServerConn = sqlServerConn;
+        private readonly string _sqlServerConnCmn = sqlServerConnCmn;
         private readonly string _pgConn = pgConn;
 
         private record TablePair(string SqlTable, string PgTable, string OrderByColumn);
@@ -17,6 +19,20 @@ namespace Migration
             if (string.IsNullOrEmpty(input))
                 return input;
 
+            var knownTokens = new[] {
+                "id", "key", "type", "ds", "system", "message", "source", "audit"
+            };
+            
+            bool isAllLower = input.All(char.IsLower);
+            if (isAllLower)
+            {
+                foreach (var token in knownTokens)
+                {
+                    input = Regex.Replace(input, token, $"_{token}", RegexOptions.IgnoreCase);
+                }
+                input = input.TrimStart('_');
+            }
+
             var sb = new StringBuilder();
             for (int i = 0; i < input.Length; i++)
             {
@@ -24,9 +40,6 @@ namespace Migration
 
                 if (char.IsUpper(c))
                 {
-                    // If not the first char and:
-                    // - previous was lower (e.g. "ProductCategory")
-                    // - OR next is lower (e.g. "APIProduct")
                     if (i > 0 &&
                         (char.IsLower(input[i - 1]) ||
                          (i + 1 < input.Length && char.IsLower(input[i + 1]))))
@@ -60,12 +73,22 @@ namespace Migration
                 new("SendGridEvents", "sendgrid_events", "eventKey"),
                 new("SendGridLog", "sendgrid_log", "EmailItemKey"),
                 new("SendGridMessages", "sendgrid_messages", "msgKey"),
-                new("SendGridTemplate", "sendgrid_template", "EmailTemplateKey"),
-                // Add more pairs as needed
+                new("SendGridTemplate", "sendgrid_template", "EmailTemplateKey")
             };
 
-            using var sqlConn = new SqlConnection(_sqlServerConn);
-            using var pgConn = new NpgsqlConnection(_pgConn);
+            var tableCmnPairs = new List<TablePair>
+            {
+                new("AuditRequest", "audit_request", "AuditKey")
+            };
+            
+            await CompareTablesSubAsync(tablePairs, _sqlServerConn, _pgConn);
+            await CompareTablesSubAsync(tableCmnPairs, _sqlServerConnCmn, _pgConn);
+         }
+
+        private async Task CompareTablesSubAsync(List<TablePair> tablePairs, string sqlCxn, string pSqlCxn)
+        {
+            await using var sqlConn = new SqlConnection(sqlCxn);
+            await using var pgConn = new NpgsqlConnection(pSqlCxn);
 
             await sqlConn.OpenAsync();
             await pgConn.OpenAsync();
@@ -161,7 +184,8 @@ namespace Migration
         {
             var comparer = new Migration(
                 "Server=.;Database=Insights;Trusted_Connection=True;trustServerCertificate=true;",
-                "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=slemkau"
+                "Server=.;Database=IntegrationCommon;Trusted_Connection=True;trustServerCertificate=true;",
+                "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=Uakmels!1!2"
             );
 
             await comparer.CompareTablesAsync();

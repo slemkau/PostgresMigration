@@ -1,4 +1,17 @@
 ﻿services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    restart: always
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "16672:15672"
+      - "6672:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - shared_net
+
   postgres:
     image: postgres:latest
     restart: unless-stopped
@@ -18,6 +31,13 @@
       postgres
       -c listen_addresses='*'
       -c hba_file=/etc/postgresql/pg_hba.conf
+    networks:
+      - shared_net
 
 volumes:
   pgdata:
+  rabbitmq_data:
+
+networks:
+  shared_net:
+    name: shared_net
