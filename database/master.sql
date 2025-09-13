@@ -13,7 +13,7 @@ CREATE DATABASE insights;
 COPY api_service_catalog FROM '/data/APIServiceCatalog.tsv' WITH (FORMAT csv, DELIMITER E'\t');
 COPY api_service_contract FROM '/data/APIServiceContract.tsv' WITH (FORMAT csv, DELIMITER E'\t');
 COPY sendgrid_template FROM '/data/SendGridTemplate.tsv' WITH (FORMAT csv, DELIMITER E'\t');
-COPY audit_request FROM '/data/audit_request.tsv' WITH (FORMAT csv, DELIMITER E'\t');
+COPY audit_request FROM '/data/AuditRequest.tsv' WITH (FORMAT csv, DELIMITER E'\t');
 
 SELECT setval('public.api_service_catalog_service_catalog_key_seq', (SELECT MAX(service_catalog_key) FROM public.api_service_catalog));
 SELECT setval('public.api_service_contract_service_contract_key_seq', (SELECT MAX(service_contract_key) FROM public.api_service_contract));
