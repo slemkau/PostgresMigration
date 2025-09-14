@@ -1,33 +1,33 @@
-1	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-51-14	Received Enquiry Update with 1 row(s) at 21/03/2023 4:51:14 PM	2023-03-21 05:51:14.6059021
-2	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-48-15	Sent 1 of 1 row(s) to OneCRM with E030 Status	2023-03-21 05:48:17.4993299
-3	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-28-17	Sent 1 of 1 row(s) to OneCRM with E020 Status	2023-03-21 05:28:21.4958947
-4	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-51-14	Sent 1 of 1 row(s) to OneCRM with E040 Status	2023-03-21 05:51:15.2777757
-5	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-48-15	Received Enquiry Update with 1 row(s) at 21/03/2023 4:48:16 PM	2023-03-21 05:48:16.2336915
-6	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-28-17	Received Enquiry Update with 1 row(s) at 21/03/2023 4:28:18 PM	2023-03-21 05:28:18.1052928
-7	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-15-31-24	Received Enquiry Update with 1 row(s) at 21/03/2023 3:31:24 PM	2023-03-21 04:31:24.0001979
-8	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-15-31-24	Sent 1 of 1 row(s) to OneCRM with E010 Status	2023-03-21 04:31:28.8440048
-9	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	OneCRM	Confirm	""	Lodged New Enquiry Request	2023-03-21 02:35:22.8552186
-10	COS-2023-011509	OneCRM Case	""	""	Fail	Confirm	OneCRM	Confirm	""	Validate enquiry insert. Enquiry No 1. COS-2023-011509 is not a valid external system reference. Reference is a duplicate              	2023-03-22 03:00:21.1383003
-11	COS-2023-011509	OneCRM Case	""	""	Success	Confirm	OneCRM	Confirm	""	Received New Enquiry Request	2023-03-21 02:35:11.8241031
+1	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-51-14	Received Enquiry Update with 1 row(s) at 21/03/2023 4:51:14 PM	2023-03-13 05:51:14.6059021
+2	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-48-15	Sent 1 of 1 row(s) to OneCRM with E030 Status	2023-03-14 05:48:17.4993299
+3	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-28-17	Sent 1 of 1 row(s) to OneCRM with E020 Status	2023-03-15 05:28:21.4958947
+4	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-51-14	Sent 1 of 1 row(s) to OneCRM with E040 Status	2023-03-16 05:51:15.2777757
+5	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-48-15	Received Enquiry Update with 1 row(s) at 21/03/2023 4:48:16 PM	2023-03-17 05:48:16.2336915
+6	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-16-28-17	Received Enquiry Update with 1 row(s) at 21/03/2023 4:28:18 PM	2023-03-18 05:28:18.1052928
+7	Schedule	Other	""	""	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-15-31-24	Received Enquiry Update with 1 row(s) at 21/03/2023 3:31:24 PM	2023-03-19 04:31:24.0001979
+8	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	Confirm	OneCRM	Confirm Status 2023-03-21-15-31-24	Sent 1 of 1 row(s) to OneCRM with E010 Status	2023-03-19 04:31:28.8440048
+9	COS-2023-011509	OneCRM Case	1107010	Confirm Enquiry	Success	Confirm	OneCRM	Confirm	""	Lodged New Enquiry Request	2023-03-20 02:35:22.8552186
+10	COS-2023-011509	OneCRM Case	""	""	Fail	Confirm	OneCRM	Confirm	""	Validate enquiry insert. Enquiry No 1. COS-2023-011509 is not a valid external system reference. Reference is a duplicate              	2023-03-20 02:35:23.1383003
+11	COS-2023-011509	OneCRM Case	""	""	Success	Confirm	OneCRM	Confirm	""	Received New Enquiry Request	2023-03-21 02:35:24.8241031
 12	COS-2023-011509	OneCRM Case	""	""	Success	Confirm	OneCRM	Confirm	""	Received New Enquiry Request	2023-03-22 03:00:17.0288907
-13	COS-2023-002207-7	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Unclean Street Request	2023-03-25 05:01:05.7376336
-14	COS-2023-000649-4	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Inserted Booked Cleanup Request	2023-03-25 05:01:07.0488971
-15	COS-2023-002002-1	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Missed Services Request	2023-03-25 05:01:05.7386330
+13	COS-2023-002207-7	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Unclean Street Request	2023-03-25 05:01:03.7376336
+14	COS-2023-000649-4	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Inserted Booked Cleanup Request	2023-03-25 05:01:04.0488971
+15	COS-2023-002002-1	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Missed Services Request	2023-03-25 05:01:04.7386330
 16	COS-2023-000649-4	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Booked Cleanup Request	2023-03-25 05:01:05.7376336
 17	COS-2023-001221-2	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Inserted Illegal Dump Request	2023-03-25 05:01:07.0488971
 18	COS-2023-002207-7	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Inserted Unclean Street Request	2023-03-25 05:01:07.0488971
 19	COS-2023-002002-1	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Inserted Missed Services Request	2023-03-25 05:01:07.2472517
-20	COS-2023-001221-2	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Illegal Dump Request	2023-03-25 05:01:05.7386330
+20	COS-2023-001221-2	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	""	Received Illegal Dump Request	2023-03-25 05:01:07.7386330
 21	COS-2023-002462-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Booked Cleanup Request	2023-03-25 05:33:45.1554498
 22	COS-2023-001223-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Unclean Street Request	2023-03-25 05:33:45.1624794
-23	COS-2023-001221-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Illegal Dump Request	2023-03-25 05:33:45.1484510
+23	COS-2023-001221-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Illegal Dump Request	2023-03-25 05:33:45.1684510
 24	COS-2023-002246-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Missed Services Request	2023-03-25 05:33:46.0235615
-25	COS-2023-002246-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Missed Services Request	2023-03-25 05:33:45.1484510
-26	COS-2023-002462-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Booked Cleanup Request	2023-03-25 05:33:46.0235615
-27	COS-2023-001221-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Illegal Dump Request	2023-03-25 05:33:46.0245635
-28	COS-2023-001223-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Unclean Street Request	2023-03-25 05:33:46.0235615
-29	COS-2023-000777-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Bin Replacement Request	2023-03-25 05:33:45.1464509
-30	COS-2023-000777-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Bin Replacement Request	2023-03-25 05:33:46.0235615
+25	COS-2023-002246-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Missed Services Request	2023-03-25 05:33:47.1484510
+26	COS-2023-002462-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Booked Cleanup Request	2023-03-25 05:33:48.0235615
+27	COS-2023-001221-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Illegal Dump Request	2023-03-25 05:33:48.0245635
+28	COS-2023-001223-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Unclean Street Request	2023-03-25 05:33:49.0235615
+29	COS-2023-000777-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Received Bin Replacement Request	2023-03-25 05:34:45.1464509
+30	COS-2023-000777-1	OneCRM Case	""	""	Success	Cleanaway	OneCRM	Cleanaway	""	Inserted Bin Replacement Request	2023-03-25 05:34:46.0235615
 31	COS-2023-002207-7	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	Waste Report 2023-03-30-18-06-47	Added 3 of 4 rows(s) to Waste file	2023-03-30 07:06:46.8139592
 32	COS-2023-000649-4	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	Waste Report 2023-03-30-18-06-47	Added 2 of 4 rows(s) to Waste file	2023-03-30 07:06:46.8139592
 33	COS-2023-002002-1	OneCRM Case	""	""	Success	Softlanding	OneCRM	Softlanding	Waste Report 2023-03-30-18-06-47	Added 4 of 4 rows(s) to Waste file	2023-03-30 07:06:46.8139592

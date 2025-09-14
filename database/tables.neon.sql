@@ -280,3 +280,32 @@ grant select, usage on sequence public.sendgrid_event_details_event_detail_key_s
 
 grant insert, select, update on public.sendgrid_event_details to slemkau;
 
+create table public.audit_request
+(
+    audit_key     serial
+        constraint pk_audit_request
+            primary key,
+    id            varchar(50),
+    id_type       varchar(50)
+        constraint ck_id_type
+            check ((id_type)::text = ANY
+                   ((ARRAY ['OneCRM Case'::character varying, 'Pathway CSM'::character varying, 'Confirm Enquiry'::character varying, 'Other'::character varying])::text[])),
+    ds_id         varchar(50),
+    ds_id_type    varchar(50),
+    status        varchar(50)
+        constraint ck_status
+            check ((status)::text = ANY
+                   ((ARRAY ['Success'::character varying, 'Warn'::character varying, 'Fail'::character varying])::text[])),
+    subject       varchar(50),
+    source_system varchar(50),
+    destination   varchar(50),
+    batch_id      varchar(50),
+    audit_message varchar(500),
+    timestamp     timestamp
+);
+
+alter table public.audit_request
+    owner to neondb_owner;
+
+grant select on public.audit_request to slemkau;
+

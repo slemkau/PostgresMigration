@@ -188,7 +188,14 @@ namespace Migration
                 "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=Uakmels!1!2"
             );
 
-            await comparer.CompareTablesAsync();
+            //await comparer.CompareTablesAsync();
+
+            var comparerp = new Postgres(
+                "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=Uakmels!1!2",
+                "Host=ep-aged-wildflower-a73xrj7p-pooler.ap-southeast-2.aws.neon.tech;Database=insights;Username=slemkau;Password=Uakmels!1!2;SSL Mode=VerifyFull;Channel Binding=Require;"
+            );
+            
+            await comparerp.CompareTablesAsync();
         }
     }
 }
