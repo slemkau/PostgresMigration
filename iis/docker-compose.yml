@@ -1,0 +1,21 @@
+services:
+  mvc-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-mvc-app
+    container_name: mvc-container
+    networks:
+      - nat
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "powershell", "-command", "try { if ((Invoke-WebRequest -Uri http://localhost/healthcheck -UseBasicParsing -TimeoutSec 5).StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  nat:
+    external: true

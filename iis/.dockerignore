@@ -1,0 +1,28 @@
+# .dockerignore - place this in your web app root directory
+# Exclude build artifacts
+bin/Debug/
+bin/Release/
+obj/
+packages/
+.vs/
+*.user
+*.suo
+*.cache
+.vscode/
+
+# Exclude source control
+.git/
+.gitignore
+
+# Exclude logs and temp files
+*.log
+Thumbs.db
+*.tmp
+
+# Exclude publish profiles
+PublishProfiles/
+*.pubxml
+
+# Exclude package files
+*.nupkg
+*.snupkg

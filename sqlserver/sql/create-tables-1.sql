@@ -45,13 +45,13 @@ CREATE TABLE [dbo].[ApplicationLog] (
     [ApplicationThread]         NVARCHAR (255)  NULL,
     [IntegrationSource]         NVARCHAR (250)  NULL,
     [IntegrationTarget]         NVARCHAR (250)  NULL,
-    [IntegrationMessage]        NTEXT           NULL,
+    [IntegrationMessage]        NVARCHAR (MAX)  NULL,
     [RelatedPolicyNumber]       NVARCHAR (25)   NULL,
     [RelatedAccountNumber]      NVARCHAR (25)   NULL,
     [RelatedClaimNumber]        NVARCHAR (25)   NULL,
     [BusinessEntityName]        NVARCHAR (60)   NULL,
     [BusinessEntityId]          NVARCHAR (25)   NULL,
-    [BusinessEntityData]        NTEXT           NULL,
+    [BusinessEntityData]        NVARCHAR (MAX)  NULL,
     [RecordedTimestamp]         DATETIME        NOT NULL,
     [ServiceContractKey]        INT             NULL,
     CONSTRAINT [PK_ApplicationLog] PRIMARY KEY CLUSTERED ([LogItemKey] ASC)
@@ -118,7 +118,7 @@ CREATE TABLE [dbo].[SendGridTemplate] (
     [EmailTemplateName] NVARCHAR (100) NOT NULL,
     [EmailTemplateBody] NVARCHAR (MAX) NULL,
     [EmailTemplateDate] DATE           NOT NULL,
-    CONSTRAINT [PK_SendGridTemplat] PRIMARY KEY CLUSTERED ([EmailTemplateKey] ASC)
+    CONSTRAINT [PK_SendGridTemplate] PRIMARY KEY CLUSTERED ([EmailTemplateKey] ASC)
 );
 
 
@@ -208,7 +208,7 @@ PRINT N'Creating Extended Property [dbo].[APIServiceCatalog].[MS_Description]...
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Logically grouped Master API definations', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'APIServiceCatalog';
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Logically grouped Master API definitions', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'APIServiceCatalog';
 
 
 GO
