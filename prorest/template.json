@@ -41,13 +41,7 @@
         "numberOfWorkers": {
             "type": "string"
         },
-        "currentStack": {
-            "type": "string"
-        },
-        "phpVersion": {
-            "type": "string"
-        },
-        "netFrameworkVersion": {
+        "linuxFxVersion": {
             "type": "string"
         }
     },
@@ -66,19 +60,12 @@
                 "name": "[parameters('name')]",
                 "siteConfig": {
                     "appSettings": [],
-                    "metadata": [
-                        {
-                            "name": "CURRENT_STACK",
-                            "value": "[parameters('currentStack')]"
-                        }
-                    ],
-                    "phpVersion": "[parameters('phpVersion')]",
-                    "netFrameworkVersion": "[parameters('netFrameworkVersion')]",
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
                     "alwaysOn": "[parameters('alwaysOn')]",
                     "ftpsState": "[parameters('ftpsState')]"
                 },
                 "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "clientAffinityEnabled": true,
+                "clientAffinityEnabled": false,
                 "virtualNetworkSubnetId": null,
                 "httpsOnly": true,
                 "publicNetworkAccess": "Enabled"
@@ -113,7 +100,7 @@
             "name": "[parameters('hostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
             "location": "[parameters('location')]",
-            "kind": "",
+            "kind": "linux",
             "tags": {},
             "dependsOn": [],
             "properties": {
@@ -121,6 +108,7 @@
                 "workerSize": "[parameters('workerSize')]",
                 "workerSizeId": "[parameters('workerSizeId')]",
                 "numberOfWorkers": "[parameters('numberOfWorkers')]",
+                "reserved": true,
                 "zoneRedundant": false
             },
             "sku": {

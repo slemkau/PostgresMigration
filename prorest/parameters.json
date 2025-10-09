@@ -15,7 +15,7 @@
             "value": "Australia East"
         },
         "hostingPlanName": {
-            "value": "ASP-GridRG-a221"
+            "value": "ASP-GridRG-a172"
         },
         "serverFarmResourceGroup": {
             "value": "GridRG"
@@ -41,14 +41,8 @@
         "workerSizeId": {
             "value": "0"
         },
-        "currentStack": {
-            "value": "dotnet"
-        },
-        "phpVersion": {
-            "value": "OFF"
-        },
-        "netFrameworkVersion": {
-            "value": "v6.0"
+        "linuxFxVersion": {
+            "value": "DOTNETCORE|6.0"
         }
     }
 }

@@ -96,10 +96,12 @@ create table if not exists public.sendgrid_template
     email_template_date date default CURRENT_DATE not null
 );
 
+grant select, usage on sequence public.sendgrid_template_email_template_key_seq to slemkau;
+
 alter table public.sendgrid_template
     owner to postgres;
 
-grant select on public.sendgrid_template to slemkau;
+grant insert, select, update on public.sendgrid_template to slemkau;
 
 create table if not exists public.sendgrid_log
 (

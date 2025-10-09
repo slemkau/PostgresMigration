@@ -28,6 +28,8 @@ alter sequence public.sendgrid_template_email_template_key_seq owner to postgres
 
 alter sequence public.sendgrid_template_email_template_key_seq owned by public.sendgrid_template.email_template_key;
 
+grant select, usage on sequence public.sendgrid_template_email_template_key_seq to slemkau;
+
 create sequence public.sendgrid_log_email_item_key_seq
     as integer;
 

@@ -58,7 +58,7 @@ namespace Migration
             return sb.ToString();
         }
 
-        public async Task CompareTablesAsync()
+        public async Task CompareTablesAsync(bool letsUpdate = false)
         {
             var tablePairs = new List<TablePair>
             {
@@ -81,11 +81,11 @@ namespace Migration
                 new("AuditRequest", "audit_request", "AuditKey")
             };
             
-            await CompareTablesSubAsync(tablePairs, _sqlServerConn, _pgConn);
-            await CompareTablesSubAsync(tableCmnPairs, _sqlServerConnCmn, _pgConn);
+            await CompareTablesSubAsync(letsUpdate, tablePairs, _sqlServerConn, _pgConn);
+            await CompareTablesSubAsync(letsUpdate, tableCmnPairs, _sqlServerConnCmn, _pgConn);
          }
 
-        private async Task CompareTablesSubAsync(List<TablePair> tablePairs, string sqlCxn, string pSqlCxn)
+        private async Task CompareTablesSubAsync(bool letsUpdate, List<TablePair> tablePairs, string sqlCxn, string pSqlCxn)
         {
             await using var sqlConn = new SqlConnection(sqlCxn);
             await using var pgConn = new NpgsqlConnection(pSqlCxn);
@@ -112,57 +112,106 @@ namespace Migration
 
                 int maxRows = Math.Max(sqlList.Count, pgList.Count);
 
-                for (int i = 0; i < maxRows; i++)
+                if (pair.SqlTable == "SendGridTemplate" && sqlList.Count == pgList.Count && letsUpdate)
                 {
-                    if (i >= sqlList.Count)
+                    for (int i = 0; i < sqlList.Count; i++)
                     {
-                        Console.WriteLine($"Extra row in PostgreSQL at row {i + 1}:");
-                        //Console.WriteLine(pgList[i]);
-                        DumpRow(pgList[i]);
-                        continue;
-                    }
-                    
-                    if (i >= pgList.Count)
-                    {
-                        Console.WriteLine($"Extra row in SQL Server at row {i + 1}:");
-                        //Console.WriteLine(sqlList[i]);
-                        DumpRow(sqlList[i]);
-                        continue;
-                    }
-                    
-                    var sqlRow = (IDictionary<string, object>) sqlList[i];
-                    var pgRow = (IDictionary<string, object>) pgList[i];
+                        var sqlRow = (IDictionary<string, object>)sqlList[i];
+                        var pgRow = (IDictionary<string, object>)pgList[i];
 
-                    foreach (var prop in sqlRow.Keys)
-                    {
-                        var sqlValue = sqlRow[prop];
-                        var pgKey = ToSnakeCase(prop);
+                        var updates = new Dictionary<string, object?>();
+                        var key = sqlRow["EmailTemplateKey"];
 
-                        if (!pgRow.TryGetValue(pgKey, out var pgValue))
+                        foreach (var prop in sqlRow.Keys)
                         {
-                            Console.WriteLine($"Row {i + 1}: PostgreSQL column '{pgKey}' not found.");
-                            continue;
-                        }
+                            if (prop == "EmailTemplateKey") continue;
 
-                        if (sqlValue is DateTime sqlDt && pgValue is DateTime pgDt)
-                        {
-                            var sqlTrunc = sqlDt.AddTicks(-(sqlDt.Ticks % TimeSpan.TicksPerSecond));
-                            var pgTrunc = pgDt.AddTicks(-(pgDt.Ticks % TimeSpan.TicksPerSecond));
+                            var sqlValue = Normalize(sqlRow[prop]);
+                            var pgKey = ToSnakeCase(prop);
 
-                            if (sqlTrunc != pgTrunc)
+                            if (!pgRow.TryGetValue(pgKey, out var pgValue))
+                                continue;
+
+                            pgValue = Normalize(pgValue);
+
+                            if (!Equals(sqlValue, pgValue))
                             {
-                                Console.WriteLine($"Row {i}, column '{pgKey}': TIMESTAMP mismatch → SQL = {sqlTrunc}, PG = {pgTrunc}");
+                                updates[pgKey] = sqlValue;
+                                Console.WriteLine($"🔧 Row {key}: column '{pgKey}' differs → updating PostgreSQL");
                             }
                         }
-                        else if (!Equals(Normalize(sqlValue), Normalize(pgValue)))
+
+                        if (updates.Count > 0)
                         {
-                            Console.WriteLine($"Mismatch in row {i + 1}, column {prop} / {pgKey}:");
-                            Console.WriteLine($"SQL Server: {sqlValue}");
-                            Console.WriteLine($"PostgreSQL: {pgValue}");
+                            var setClause = string.Join(", ", updates.Keys.Select(k => $"{k} = @{k}"));
+                            var parameters = new DynamicParameters(updates);
+                            parameters.Add("key", key);
+
+                            await pgConn.ExecuteAsync(
+                                $"UPDATE sendgrid_template SET {setClause} WHERE email_template_key = @key",
+                                parameters
+                            );
+
+                            Console.WriteLine($"✅ Row {key} updated in PostgreSQL.");
                         }
                     }
                 }
-            }
+                else
+                {
+                    for (int i = 0; i < maxRows; i++)
+                    {
+                        if (i >= sqlList.Count)
+                        {
+                            Console.WriteLine($"Extra row in PostgreSQL at row {i + 1}:");
+                            //Console.WriteLine(pgList[i]);
+                            DumpRow(pgList[i]);
+                            continue;
+                        }
+
+                        if (i >= pgList.Count)
+                        {
+                            Console.WriteLine($"Extra row in SQL Server at row {i + 1}:");
+                            //Console.WriteLine(sqlList[i]);
+                            DumpRow(sqlList[i]);
+                            continue;
+                        }
+
+                        var sqlRow = (IDictionary<string, object>)sqlList[i];
+                        var pgRow = (IDictionary<string, object>)pgList[i];
+
+                        foreach (var prop in sqlRow.Keys)
+                        {
+                            var sqlValue = sqlRow[prop];
+                            var pgKey = ToSnakeCase(prop);
+
+                            if (!pgRow.TryGetValue(pgKey, out var pgValue))
+                            {
+                                Console.WriteLine($"Row {i + 1}: PostgreSQL column '{pgKey}' not found.");
+                                continue;
+                            }
+
+                            if (sqlValue is DateTime sqlDt && pgValue is DateTime pgDt)
+                            {
+                                var sqlTrunc = sqlDt.AddTicks(-(sqlDt.Ticks % TimeSpan.TicksPerSecond));
+                                var pgTrunc = pgDt.AddTicks(-(pgDt.Ticks % TimeSpan.TicksPerSecond));
+
+                                if (sqlTrunc != pgTrunc)
+                                {
+                                    Console.WriteLine($"Mismatch in row {i + 1}, column {prop} / {pgKey}");
+                                    Console.WriteLine($"SQL Server: {sqlTrunc}");
+                                    Console.WriteLine($"PostgreSQL: {pgTrunc}");
+                                }
+                            }
+                            else if (!Equals(Normalize(sqlValue), Normalize(pgValue)))
+                            {
+                                Console.WriteLine($"Mismatch in row {i + 1}, column {prop} / {pgKey}:");
+                                Console.WriteLine($"SQL Server: {sqlValue}");
+                                Console.WriteLine($"PostgreSQL: {pgValue}");
+                            }
+                        }
+                    }
+                }
+           }
         }
 
         void DumpRow(object rowObj)
@@ -182,17 +231,19 @@ namespace Migration
     {
         static async Task Main()
         {
+            bool letsUpdate = false;
+
             var comparer = new Migration(
                 "Server=.;Database=Insights;Trusted_Connection=True;trustServerCertificate=true;",
                 "Server=.;Database=IntegrationCommon;Trusted_Connection=True;trustServerCertificate=true;",
-                "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=Uakmels!1!2"
+                "Host=ep-aged-wildflower-a73xrj7p-pooler.ap-southeast-2.aws.neon.tech;Database=insights;Username=slemkau;Password=Uakmels!1!2;SSL Mode=VerifyFull;Channel Binding=Require;"
             );
 
-            //await comparer.CompareTablesAsync();
+            await comparer.CompareTablesAsync(letsUpdate);
 
             var comparerp = new Postgres(
                 "Host=localhost;Port=5432;Database=insights;Username=slemkau;Password=Uakmels!1!2",
-                "Host=localhost;Port=5433;Database=insights;Username=slemkau;Password=Uakmels!1!2"
+                "Host=ep-aged-wildflower-a73xrj7p-pooler.ap-southeast-2.aws.neon.tech;Database=insights;Username=slemkau;Password=Uakmels!1!2;SSL Mode=VerifyFull;Channel Binding=Require;"
             );
             
             //"Host=localhost;Port=5433;Database=insights;Username=slemkau;Password=Uakmels!1!2"

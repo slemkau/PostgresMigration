@@ -16,6 +16,8 @@ alter sequence public.sendgrid_template_email_template_key_seq OWNER TO neondb_o
 
 alter sequence public.sendgrid_template_email_template_key_seq owned by public.sendgrid_template.email_template_key;
 
+grant select, usage on sequence public.sendgrid_template_email_template_key_seq to slemkau;
+
 alter sequence public.sendgrid_log_email_item_key_seq OWNER TO neondb_owner;
 
 alter sequence public.sendgrid_log_email_item_key_seq owned by public.sendgrid_log.email_item_key;
