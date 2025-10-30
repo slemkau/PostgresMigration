@@ -4,15 +4,12 @@
 /opt/mssql/bin/sqlservr &
 
 # Wait for SQL Server to be ready
-sleep 30
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P 'MyStr0ng!Pass123' -l 30 -C -Q "SELECT 1" &> /dev/null
 
 # Execute your scripts
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/init-db.sql
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/create-types.sql
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/create-tables.sql
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/create-views.sql
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/create-sprocs.sql
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "YourStrong!Passw0rd" -i /usr/src/sql/seed-data.sql
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "MyStr0ng!Pass123" -l 30 -C -i /usr/src/sql/init-db.sql
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "MyStr0ng!Pass123" -l 30 -C -i /usr/src/sql/create-artifacts.sql
+# /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "MyStr0ng!Pass123" -l 30 -No -i /usr/src/sql/seed-data.sql
 
 # Bring SQL Server to foreground
 wait

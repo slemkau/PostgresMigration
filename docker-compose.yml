@@ -34,9 +34,22 @@
     networks:
       - shared_net
 
+  sqlserver:
+    image: sqlserver
+    ports:
+      - "11433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=MyStr0ng!Pass123
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    entrypoint: [ "/bin/bash", "/usr/src/sql/entrypoint.sh" ]
+
 volumes:
   pgdata:
   rabbitmq_data:
+  sqlserver_data:
 
 networks:
   shared_net:

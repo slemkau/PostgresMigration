@@ -22,7 +22,7 @@ alter table public.notification_vw
 
 grant select on public.notification_vw to slemkau;
 
-create or replace view public.notification_with_site_change
+create or replace view public.notifications_vw
             (full_name, recorded, msg_id, company, parent, trade, status, certificate, issued, site_id, prev_site_id,
              show_trade_again)
 as
@@ -44,8 +44,8 @@ SELECT full_name,
            END                                                                           AS show_trade_again
 FROM notification_vw;
 
-alter table public.notification_with_site_change
+alter table public.notifications_vw
     owner to postgres;
 
-grant select on public.notification_with_site_change to slemkau;
+grant select on public.notifications_vw to slemkau;
 
