@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "7c570308-2fa8-4f03-992d-7344aba8d858"
+        },
+        "resourceGroupName": {
+            "value": "GridRG"
+        },
+        "name": {
+            "value": "proweb"
+        },
+        "location": {
+            "value": "Australia East"
+        },
+        "hostingPlanName": {
+            "value": "ASP-GridRG-a172"
+        },
+        "serverFarmResourceGroup": {
+            "value": "GridRG"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "ftpsState": {
+            "value": "FtpsOnly"
+        },
+        "linuxFxVersion": {
+            "value": "DOTNETCORE|6.0"
+        }
+    }
+}
